@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方程闯关大冒险 - 网页版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 登录界面 -->
+    <div id="login-page" class="page active">
+        <div class="background"></div>
+        <div class="login-container">
+            <h1 class="title">方程闯关大冒险</h1>
+            <div class="input-group">
+                <label for="username">姓名/小组编号：</label>
+                <input type="text" id="username" placeholder="请输入姓名或编号">
+            </div>
+            <button id="start-btn" class="btn primary-btn">开始闯关</button>
+        </div>
+    </div>
+
+    <!-- 游戏主界面 -->
+    <div id="game-page" class="page">
+        <div class="header">
+            <span>当前关卡：第<span id="current-level">1</span>关（共3关）</span>
+            <span>当前积分：<span id="current-score">0</span>分</span>
+        </div>
+        <div class="question-card">
+            <h2 class="question-title">题目<span id="question-index">1</span>：<span id="question-content"></span></h2>
+            <div id="answer-area" class="answer-area"></div>
+        </div>
+        <div class="btn-group">
+            <button id="submit-btn" class="btn success-btn">提交答案</button>
+            <button id="quit-btn" class="btn danger-btn">退出游戏</button>
+            <button id="rank-btn" class="btn warning-btn">排行榜</button>
+        </div>
+    </div>
+
+    <!-- 排行榜弹窗 -->
+    <div id="rank-modal" class="modal">
+        <div class="modal-content">
+            <h2>积分排行榜（前10名）</h2>
+            <div id="rank-list" class="rank-list"></div>
+            <button id="close-rank-btn" class="btn danger-btn">关闭</button>
+        </div>
+    </div>
+
+    <!-- 通关证书界面 -->
+    <div id="certificate-page" class="page">
+        <div class="certificate-container">
+            <h1 class="cert-title">方程小达人证书</h1>
+            <p class="cert-content">授予：<span id="cert-username"></span></p>
+            <p class="cert-content">成功通关「方程闯关大冒险」全部关卡</p>
+            <p class="cert-info">总积分：<span id="cert-score"></span>分</p>
+            <p class="cert-info">通关时间：<span id="cert-time"></span></p>
+            <button id="close-cert-btn" class="btn danger-btn">关闭证书</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

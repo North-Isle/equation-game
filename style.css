@@ -1,0 +1,344 @@
+/* 全局样式重置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "微软雅黑", "Microsoft YaHei", sans-serif;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f5f9ff;
+}
+
+/* 页面切换样式 */
+.page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* 登录界面样式 */
+#login-page .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    opacity: 0.9;
+}
+
+.login-container {
+    position: relative;
+    z-index: 10;
+    width: 400px;
+    margin: 150px auto;
+    padding: 50px 30px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.title {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.input-group {
+    margin-bottom: 30px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 16px;
+    color: #34495e;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #3498db;
+}
+
+/* 按钮样式 */
+.btn {
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.primary-btn {
+    background-color: #3498db;
+    color: white;
+    width: 100%;
+    font-size: 18px;
+    padding: 14px;
+}
+
+.primary-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.success-btn {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.success-btn:hover {
+    background-color: #27ae60;
+}
+
+.danger-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.danger-btn:hover {
+    background-color: #c0392b;
+}
+
+.warning-btn {
+    background-color: #f39c12;
+    color: white;
+}
+
+.warning-btn:hover {
+    background-color: #e67e22;
+}
+
+/* 游戏界面样式 */
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: #3498db;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    font-size: 18px;
+}
+
+.header span:last-child {
+    color: #f1c40f;
+    font-weight: bold;
+}
+
+.question-card {
+    width: 600px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.question-title {
+    font-size: 22px;
+    color: #2c3e50;
+    margin-bottom: 30px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.answer-area {
+    margin-top: 20px;
+}
+
+.answer-area input[type="text"] {
+    width: 200px;
+    padding: 12px 15px;
+    font-size: 18px;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    outline: none;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.answer-area input[type="text"]:focus {
+    border-color: #3498db;
+}
+
+.option-item {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    font-size: 18px;
+    color: #34495e;
+    cursor: pointer;
+}
+
+.option-item input {
+    margin-right: 15px;
+    width: 20px;
+    height: 20px;
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 80px;
+}
+
+/* 排行榜弹窗样式 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    width: 600px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+.rank-list {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 30px;
+}
+
+.rank-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid #ecf0f1;
+    font-size: 16px;
+}
+
+.rank-item:nth-child(1), .rank-item:nth-child(2), .rank-item:nth-child(3) {
+    font-weight: bold;
+}
+
+.rank-item:nth-child(1) {
+    color: #e74c3c;
+}
+
+.rank-item:nth-child(2) {
+    color: #3498db;
+}
+
+.rank-item:nth-child(3) {
+    color: #f39c12;
+}
+
+.rank-item span {
+    width: 25%;
+}
+
+/* 证书界面样式 */
+.certificate-container {
+    width: 700px;
+    height: 500px;
+    margin: 80px auto;
+    padding: 50px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+    border: 10px solid #3498db;
+}
+
+.cert-title {
+    font-size: 36px;
+    color: #2c3e50;
+    margin-bottom: 60px;
+    font-weight: bold;
+}
+
+.cert-content {
+    font-size: 24px;
+    color: #3498db;
+    margin: 30px 0;
+}
+
+.cert-info {
+    font-size: 20px;
+    color: #34495e;
+    margin: 15px 0;
+}
+
+#close-cert-btn {
+    margin-top: 50px;
+    padding: 14px 30px;
+    font-size: 18px;
+}
+
+/* 响应式适配（手机端） */
+@media (max-width: 768px) {
+    .login-container {
+        width: 90%;
+        margin: 100px auto;
+        padding: 30px 20px;
+    }
+
+    .question-card {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .certificate-container {
+        width: 90%;
+        height: auto;
+        padding: 30px 20px;
+        margin: 50px auto;
+    }
+
+    .btn-group {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+}
