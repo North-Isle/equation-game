@@ -8,27 +8,29 @@ const gameState = {
     usedQuestions: new Set(),
     selectedOption: null,
     questionBank: {
-        // 题库（可修改或替换为外部JSON，这里内置示例）
+        // Level 1：基础一元一次方程（直接求解）
         level1: [
-            { type: "fill", question: "5 + 3 × 2 = ?", answer: 11 },
-            { type: "fill", question: "18 ÷ (3 + 3) = ?", answer: 3 },
-            { type: "choice", question: "下列哪个是方程 2x + 5 = 15 的解？", options: ["x=5", "x=10", "x=3", "x=7"], answer: "x=5" },
-            { type: "choice", question: "3x - 7 = 8，x 的值是？", options: ["x=3", "x=5", "x=4", "x=6"], answer: "x=5" },
-            { type: "fill", question: "4 × (6 - 2) = ?", answer: 16 }
+            { type: "fill", question: "解方程：2x + 5 = 15，求 x 的值", answer: 5 },
+            { type: "fill", question: "解方程：3x - 7 = 8，求 x 的值", answer: 5 },
+            { type: "choice", question: "方程 5x + 3 = 23 的解是？", options: ["x=4", "x=5", "x=6", "x=3"], answer: "x=4" },
+            { type: "choice", question: "解方程：4x - 12 = 20，x 的值为？", options: ["x=7", "x=8", "x=9", "x=6"], answer: "x=8" },
+            { type: "fill", question: "解方程：x ÷ 4 + 2 = 5，求 x 的值", answer: 12 }
         ],
+        // Level 2：稍复杂一元一次方程（含括号、移项）
         level2: [
-            { type: "choice", question: "方程 5x - 12 = 18 的解是？", options: ["x=6", "x=5", "x=7", "x=8"], answer: "x=6" },
-            { type: "fill", question: "7 × 8 - 12 ÷ 3 = ?", answer: 52 },
-            { type: "choice", question: "(x + 4) × 2 = 18，x = ?", options: ["x=5", "x=6", "x=7", "x=8"], answer: "x=5" },
-            { type: "fill", question: "100 - (25 + 35) ÷ 2 = ?", answer: 70 },
-            { type: "choice", question: "3x + 2x = 25，x = ?", options: ["x=4", "x=5", "x=6", "x=7"], answer: "x=5" }
+            { type: "choice", question: "解方程：2(x + 3) = 16，x = ?", options: ["x=5", "x=6", "x=7", "x=8"], answer: "x=5" },
+            { type: "fill", question: "解方程：3(2x - 4) = 18，求 x 的值", answer: 5 },
+            { type: "choice", question: "5x - 3(x - 2) = 16，x 的解是？", options: ["x=5", "x=6", "x=7", "x=8"], answer: "x=5" },
+            { type: "fill", question: "解方程：(x + 8) ÷ 2 = 9，求 x 的值", answer: 10 },
+            { type: "choice", question: "4x + 2(5 - x) = 22，x = ?", options: ["x=6", "x=7", "x=8", "x=9"], answer: "x=6" }
         ],
+        // Level 3：复杂方程/方程组/方程应用
         level3: [
-            { type: "fill", question: "5 × (3 + 2 × 4) - 10 = ?", answer: 45 },
-            { type: "choice", question: "2(x - 3) + 5 = 15，x = ?", options: ["x=8", "x=7", "x=9", "x=6"], answer: "x=8" },
-            { type: "fill", question: "(48 ÷ 8 + 3) × 2 = ?", answer: 18 },
-            { type: "choice", question: "5x - 3(x + 2) = 10，x = ?", options: ["x=7", "x=8", "x=9", "x=6"], answer: "x=8" },
-            { type: "fill", question: "12 × [ (7 - 4) × 2 ] = ?", answer: 72 }
+            { type: "fill", question: "解方程组：{x + y = 10, x - y = 2}，求 x 的值", answer: 6 },
+            { type: "choice", question: "某数的 3 倍比它的 2 倍多 5，设该数为 x，方程正确的是？", options: ["3x - 2x = 5", "3x + 2x = 5", "3x = 2x - 5", "2x - 3x = 5"], answer: "3x - 2x = 5" },
+            { type: "fill", question: "解方程：2x + 3(4 - x) = 11，求 x 的值", answer: 1 },
+            { type: "choice", question: "解方程组：{2x + y = 13, x + 2y = 14}，x + y 的值是？", options: ["9", "10", "11", "12"], answer: "9" },
+            { type: "fill", question: "甲有 x 元，乙的钱数是甲的 2 倍多 3 元，两人共有 33 元，求 x 的值", answer: 10 }
         ]
     }
 };
@@ -54,7 +56,11 @@ const elements = {
     rankListEl: document.getElementById("rank-list"),
     certUsernameEl: document.getElementById("cert-username"),
     certScoreEl: document.getElementById("cert-score"),
-    certTimeEl: document.getElementById("cert-time")
+    certTimeEl: document.getElementById("cert-time"),
+    // 新增：关闭网页按钮
+    closePageBtn: document.getElementById("close-page-btn"),
+    closePageBtnGame: document.getElementById("close-page-btn-game"),
+    closePageBtnCert: document.getElementById("close-page-btn-cert")
 };
 
 // ---------------------- 1. 排行榜本地存储（替代JSON文件） ----------------------
@@ -206,7 +212,14 @@ function showCertificatePage() {
     elements.certTimeEl.textContent = new Date().toLocaleString();
 }
 
-// ---------------------- 4. 事件绑定 ----------------------
+// ---------------------- 4. 新增：关闭网页函数 ----------------------
+function closeWebPage() {
+    if (confirm("确定要关闭网页吗？当前进度会保存！")) {
+        window.close(); // 关闭当前浏览器标签页
+    }
+}
+
+// ---------------------- 5. 事件绑定 ----------------------
 // 初始化事件
 function initEvents() {
     // 开始游戏
@@ -280,7 +293,7 @@ function initEvents() {
         }
     });
     
-    // 退出游戏
+    // 退出游戏（返回登录页）
     elements.quitBtn.addEventListener("click", () => {
         if (confirm("确定要退出游戏吗？当前进度会保存！")) {
             showLoginPage();
@@ -298,7 +311,7 @@ function initEvents() {
         elements.rankModal.classList.remove("active");
     });
     
-    // 关闭证书
+    // 关闭证书（返回登录页）
     elements.closeCertBtn.addEventListener("click", () => {
         showLoginPage();
     });
@@ -309,6 +322,11 @@ function initEvents() {
             elements.rankModal.classList.remove("active");
         }
     });
+    
+    // ---------------------- 新增：绑定关闭网页按钮事件 ----------------------
+    elements.closePageBtn.addEventListener("click", closeWebPage);
+    elements.closePageBtnGame.addEventListener("click", closeWebPage);
+    elements.closePageBtnCert.addEventListener("click", closeWebPage);
 }
 
 // ---------------------- 程序入口 ----------------------
